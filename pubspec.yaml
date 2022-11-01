@@ -1,0 +1,38 @@
+name: online_course
+version: 1.0.0+1
+publish_to: none
+description: A new Flutter project.
+environment: 
+  sdk: '>=2.18.2 <3.0.0'
+
+dependencies: 
+  cupertino_icons: ^1.0.2
+  get: 4.6.5
+  double_back_to_close: 2.0.0
+  persistent_bottom_nav_bar: 5.0.2
+  flutter_svg: 1.1.5
+  video_player: 2.4.7
+  flutter: 
+    sdk: flutter
+
+dev_dependencies: 
+  flutter_lints: ^2.0.0
+  lints: 2.0.0
+  flutter_test: 
+    sdk: flutter
+
+flutter: 
+  assets: 
+    - assets/
+    - assets/images/
+    - assets/images/svg/
+    - assets/images/png/
+  fonts: 
+    - family: Poppins
+      fonts: 
+        - asset: assets/fonts/Poppins-Regular.ttf
+    - family: NanumGothic
+      fonts: 
+        - asset: assets/fonts/NanumGothic-Regular.ttf
+  uses-material-design: true
+
