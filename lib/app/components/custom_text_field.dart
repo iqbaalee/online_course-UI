@@ -24,6 +24,7 @@ class CustomTextField extends StatelessWidget {
   final Color? cursorColor;
   final TextStyle? style;
   final TextInputAction? textInputAction;
+  final Color? borderColor;
   const CustomTextField({
     super.key,
     required this.controller,
@@ -47,6 +48,7 @@ class CustomTextField extends StatelessWidget {
     this.cursorColor,
     this.style,
     this.textInputAction,
+    this.borderColor,
   });
 
   @override
@@ -54,13 +56,16 @@ class CustomTextField extends StatelessWidget {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
+        border: Border.all(
+          color: borderColor ?? Colors.transparent,
+        ),
         borderRadius: BorderRadius.circular(radius ?? 10),
         color: backgroundColor ?? Get.theme.scaffoldBackgroundColor,
       ),
       child: Center(
         child: TextField(
           textInputAction: textInputAction ?? TextInputAction.done,
-          style: style ?? Get.textTheme.bodyText1,
+          style: style,
           controller: controller,
           onChanged: (value) {
             if (onChanged != null) onChanged!();

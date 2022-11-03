@@ -67,27 +67,50 @@ class OnboardingView extends GetView<OnboardingController> {
                 }).toList(),
               ),
             ),
+            Obx(
+              () => controller.currentPage.value !=
+                      controller.onboarding.length - 1
+                  ? Positioned(
+                      top: 0,
+                      right: 30,
+                      child: GestureDetector(
+                        onTap: () {
+                          Get.toNamed(Routes.LOGIN);
+                        },
+                        child: Text(
+                          'Skip',
+                          style: textTitle(),
+                        ),
+                      ),
+                    )
+                  : SizedBox(),
+            ),
             Positioned.fromRelativeRect(
               rect: RelativeRect.fromLTRB(0, Get.height * .5, 0, 0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: controller.onboarding.map((e) {
+              child: GetBuilder<OnboardingController>(
+                id: 'onboarding',
+                builder: (oC) {
                   return Row(
-                    children: [
-                      e.isActive == true
-                          ? OnboardingIndicator()
-                          : Container(
-                              width: 5,
-                              height: 5,
-                              decoration: BoxDecoration(
-                                color: Get.theme.primaryColor,
-                                shape: BoxShape.circle,
-                              ),
-                            ),
-                      SizedBox(width: 10),
-                    ],
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: controller.onboarding.map((e) {
+                      return Row(
+                        children: [
+                          e.isActive == true
+                              ? OnboardingIndicator()
+                              : Container(
+                                  width: 5,
+                                  height: 5,
+                                  decoration: BoxDecoration(
+                                    color: Get.theme.primaryColor,
+                                    shape: BoxShape.circle,
+                                  ),
+                                ),
+                          SizedBox(width: 10),
+                        ],
+                      );
+                    }).toList(),
                   );
-                }).toList(),
+                },
               ),
             ),
           ],
@@ -107,7 +130,7 @@ class OnboardingView extends GetView<OnboardingController> {
               ),
             ),
             onPressed: () {
-              Get.toNamed(Routes.MAIN);
+              Get.toNamed(Routes.LOGIN);
             },
             child: Text(
               'Get Started',

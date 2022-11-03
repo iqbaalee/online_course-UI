@@ -5,6 +5,7 @@ TextStyle textTitle({
   Color? color,
   FontWeight? fontWeight = FontWeight.bold,
   FontStyle? fontStyle = FontStyle.normal,
+  double? heightText = 1.2,
 }) =>
     TextStyle(
       fontSize: size,
@@ -12,7 +13,7 @@ TextStyle textTitle({
       fontWeight: fontWeight,
       fontStyle: fontStyle,
       fontFamily: 'Poppins',
-      height: 1.2,
+      height: heightText ?? 0,
       letterSpacing: 1,
     );
 
@@ -21,6 +22,7 @@ TextStyle textSubtitle({
   Color? color,
   FontWeight? fontWeight = FontWeight.bold,
   FontStyle? fontStyle = FontStyle.normal,
+  double? heightText = 0,
 }) =>
     TextStyle(
       fontSize: size,
@@ -28,7 +30,7 @@ TextStyle textSubtitle({
       fontWeight: fontWeight,
       fontStyle: fontStyle,
       fontFamily: 'Poppins',
-      height: 1.2,
+      height: heightText ?? 0,
       letterSpacing: .2,
     );
 

@@ -12,6 +12,7 @@ abstract class Routes {
   static const CLASS_DETAIL = _Paths.CLASS_DETAIL;
   static const SEARCH = _Paths.SEARCH;
   static const ONBOARDING = _Paths.ONBOARDING;
+  static const LOGIN = _Paths.LOGIN;
 }
 
 abstract class _Paths {
@@ -21,4 +22,5 @@ abstract class _Paths {
   static const CLASS_DETAIL = '/class-detail';
   static const SEARCH = '/search';
   static const ONBOARDING = '/onboarding';
+  static const LOGIN = '/login';
 }

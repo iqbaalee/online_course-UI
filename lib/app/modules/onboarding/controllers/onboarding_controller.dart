@@ -4,6 +4,7 @@ import 'package:online_course/app/data/models/onboarding_model.dart';
 
 class OnboardingController extends GetxController {
   late PageController pageController;
+  final RxInt currentPage = 0.obs;
   final onboarding = [
     OnboardingModel(
       index: 0,
@@ -42,6 +43,8 @@ class OnboardingController extends GetxController {
   void onClose() {}
 
   void scrollOnboarding(value) {
+    currentPage(value);
+
     var tempOnboarding = [...onboarding];
     for (var e in onboarding) {
       if (e.index == value) {

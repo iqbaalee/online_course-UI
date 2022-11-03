@@ -18,6 +18,8 @@ class CustomInputPassword extends StatefulWidget {
   final Function? onChanged;
   final Function? onEditingComplete;
   final bool? typePassword;
+  final Color? borderColor;
+  final TextStyle? style;
   const CustomInputPassword({
     super.key,
     required this.controller,
@@ -36,6 +38,8 @@ class CustomInputPassword extends StatefulWidget {
     this.onChanged,
     this.onEditingComplete,
     this.typePassword,
+    this.borderColor,
+    this.style,
   });
 
   @override
@@ -49,10 +53,14 @@ class _CustomInputPasswordState extends State<CustomInputPassword> {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
+        border: Border.all(
+          color: widget.borderColor ?? Colors.transparent,
+        ),
         borderRadius: BorderRadius.circular(widget.radius ?? 10),
         color: Get.theme.scaffoldBackgroundColor,
       ),
       child: TextField(
+        style: widget.style,
         obscureText: showPassword,
         controller: widget.controller,
         onSubmitted: (value) {
@@ -64,7 +72,6 @@ class _CustomInputPasswordState extends State<CustomInputPassword> {
           }
         },
         decoration: InputDecoration(
-          isDense: true,
           contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
           hintText: widget.hintText ?? '',
           hintStyle: TextStyle(color: widget.hintStyleColor ?? Colors.grey),

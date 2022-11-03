@@ -91,7 +91,7 @@ class SearchView extends GetView<SearchController> {
         ),
       ),
       body: GestureDetector(
-        onTap: () => FocusScope.of(context).unfocus(),
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: Container(
           height: Get.height,
           width: Get.width,
