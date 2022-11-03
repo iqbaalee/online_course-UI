@@ -129,13 +129,28 @@ class HomeView extends GetView<HomeController> {
                                     style: textTitle(size: 20),
                                   ),
                                   const SizedBox(
-                                    height: 15,
+                                    height: 10,
                                   ),
-                                  Slider(
-                                      value: .9,
-                                      onChanged: (val) {
-                                        print(val);
-                                      }),
+                                  GetBuilder<HomeController>(
+                                    id: 'price',
+                                    builder: (hC) {
+                                      return RangeSlider(
+                                        divisions: 10,
+                                        values: hC.rangeValues,
+                                        max: 1000,
+                                        activeColor: Get.theme.primaryColor,
+                                        inactiveColor:
+                                            Colors.grey.withOpacity(0.2),
+                                        labels: RangeLabels(
+                                          '\$${hC.minRangeValues.toInt()}',
+                                          '\$${hC.maxRangeValues.toInt()}',
+                                        ),
+                                        onChanged: (value) {
+                                          controller.changePrice(value);
+                                        },
+                                      );
+                                    },
+                                  ),
                                   const SizedBox(
                                     height: 15,
                                   ),

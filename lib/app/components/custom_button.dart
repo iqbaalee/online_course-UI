@@ -9,6 +9,7 @@ class CustomButton extends StatelessWidget {
   final TextStyle? textStyle;
   final double? radius;
   final double? textSize;
+  final Color? borderColor;
   const CustomButton({
     super.key,
     this.onTap,
@@ -18,6 +19,7 @@ class CustomButton extends StatelessWidget {
     this.textStyle,
     this.radius,
     this.textSize,
+    this.borderColor,
   });
 
   @override
@@ -27,6 +29,9 @@ class CustomButton extends StatelessWidget {
         backgroundColor: color ?? Theme.of(context).primaryColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(radius ?? 50),
+          side: BorderSide(
+            color: borderColor ?? Theme.of(context).primaryColor,
+          ),
         ),
       ),
       onPressed: () {

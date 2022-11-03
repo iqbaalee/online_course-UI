@@ -39,8 +39,20 @@ class ClassDetailView extends GetView<ClassDetailController> {
                     borderRadius: BorderRadius.circular(10),
                     child: Stack(
                       children: [
-                        VideoPlayer(
-                          controller.videoPlayerController,
+                        Obx(
+                          () => controller.isLoading.isFalse
+                              ? VideoPlayer(
+                                  controller.videoPlayerController,
+                                )
+                              : DecoratedBox(
+                                  decoration: BoxDecoration(
+                                      color: Get.theme.scaffoldBackgroundColor),
+                                  child: Center(
+                                    child: CircularProgressIndicator(
+                                      color: Get.theme.primaryColor,
+                                    ),
+                                  ),
+                                ),
                         ),
                         Positioned(
                           bottom: 0,
@@ -322,7 +334,7 @@ class ClassDetailView extends GetView<ClassDetailController> {
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        height: 70,
+                        height: 80,
                         child: Row(
                           children: [
                             Container(
@@ -395,10 +407,6 @@ class ClassDetailView extends GetView<ClassDetailController> {
                           ],
                         ),
                       ),
-                      if (i != 50)
-                        SizedBox(
-                          height: 10,
-                        ),
                     ],
                   );
                 },

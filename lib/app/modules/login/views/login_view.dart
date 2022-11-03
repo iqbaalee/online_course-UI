@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:online_course/app/components/custom_button.dart';
 import 'package:online_course/app/components/custom_input_password.dart';
 import 'package:online_course/app/components/custom_text_field.dart';
+import 'package:online_course/app/routes/app_pages.dart';
 import 'package:online_course/app/utils/style.dart';
 
 import '../controllers/login_controller.dart';
@@ -98,27 +99,38 @@ class LoginView extends GetView<LoginController> {
                 SizedBox.fromSize(
                   size: Size(Get.width, 55),
                   child: CustomButton(
-                    onTap: () {},
+                    onTap: () {
+                      Get.toNamed(Routes.MAIN);
+                    },
                     text: 'Sign In',
                   ),
                 ),
                 SizedBox(height: 20),
                 Row(children: <Widget>[
                   Expanded(
-                    child: Divider(),
+                    child: Divider(
+                      thickness: 2,
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
                     child: Text("OR"),
                   ),
-                  Expanded(child: Divider()),
+                  Expanded(
+                    child: Divider(
+                      thickness: 2,
+                    ),
+                  ),
                 ]),
                 SizedBox(height: 20),
                 SizedBox.fromSize(
                   size: Size(Get.width, 55),
                   child: CustomButton(
+                    color: Colors.white,
                     onTap: () {},
                     text: 'Using Social Media Account',
+                    textColor: Colors.black,
+                    borderColor: Colors.black,
                   ),
                 ),
                 SizedBox(height: 20),
