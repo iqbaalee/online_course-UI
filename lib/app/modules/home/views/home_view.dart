@@ -1,9 +1,14 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:get/get.dart';
 import 'package:online_course/app/components/badge.dart';
-import 'package:online_course/app/components/custom_input_password.dart';
+import 'package:online_course/app/components/badge_rating.dart';
+import 'package:online_course/app/components/card_course.dart';
+import 'package:collection/collection.dart';
+import 'package:online_course/app/routes/app_pages.dart';
 import 'package:online_course/app/utils/style.dart';
 
 import '../controllers/home_controller.dart';
@@ -70,34 +75,32 @@ class HomeView extends GetView<HomeController> {
                 child: Row(
                   children: [
                     Expanded(
-                      child: CustomInputPassword(
-                          controller: TextEditingController()),
-                      // child: GestureDetector(
-                      //   onTap: () => Get.toNamed(Routes.SEARCH),
-                      //   child: Container(
-                      //     decoration: BoxDecoration(
-                      //       color: Colors.white,
-                      //       borderRadius: BorderRadius.circular(10),
-                      //     ),
-                      //     padding: EdgeInsets.symmetric(
-                      //         horizontal: 15, vertical: 10),
-                      //     child: Row(children: [
-                      //       Text(
-                      //         'Search for a course',
-                      //         style: textTitle(
-                      //           size: 14,
-                      //           fontWeight: FontWeight.normal,
-                      //           color: Colors.grey,
-                      //         ),
-                      //       ),
-                      //       Spacer(),
-                      //       Icon(
-                      //         Icons.search,
-                      //         color: Colors.grey,
-                      //       ),
-                      //     ]),
-                      //   ),
-                      // ),
+                      child: GestureDetector(
+                        onTap: () => Get.toNamed(Routes.SEARCH),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 15, vertical: 10),
+                          child: Row(children: [
+                            Text(
+                              'Search for a course',
+                              style: textTitle(
+                                size: 14,
+                                fontWeight: FontWeight.normal,
+                                color: Colors.grey,
+                              ),
+                            ),
+                            Spacer(),
+                            Icon(
+                              Icons.search,
+                              color: Colors.grey,
+                            ),
+                          ]),
+                        ),
+                      ),
                     ),
                     SizedBox(width: 10),
                     Material(
@@ -105,7 +108,150 @@ class HomeView extends GetView<HomeController> {
                       borderRadius: BorderRadius.circular(10),
                       child: InkWell(
                         borderRadius: BorderRadius.circular(10),
-                        onTap: () {},
+                        onTap: () {
+                          Get.bottomSheet(
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 25),
+                              height: Get.height * 0.5,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(20),
+                                  topRight: Radius.circular(20),
+                                ),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Price',
+                                    style: textTitle(size: 20),
+                                  ),
+                                  const SizedBox(
+                                    height: 15,
+                                  ),
+                                  Slider(
+                                      value: .9,
+                                      onChanged: (val) {
+                                        print(val);
+                                      }),
+                                  const SizedBox(
+                                    height: 15,
+                                  ),
+                                  Text(
+                                    'Rating',
+                                    style: textTitle(size: 20),
+                                  ),
+                                  const SizedBox(
+                                    height: 15,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: controller.rating
+                                        .map(
+                                          (e) => BadgeRating(
+                                            rating: e,
+                                          ),
+                                        )
+                                        .toList(),
+                                  ),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  Text(
+                                    'Category',
+                                    style: textTitle(
+                                      size: 20,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 15,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: controller.badgeFilter
+                                        .mapIndexed((i, e) {
+                                      return Row(
+                                        children: [
+                                          SizedBox.fromSize(
+                                            size: Size(150, 50),
+                                            child: Badge(
+                                              blurRadius: 4,
+                                              offset: Offset(0, 3),
+                                              badge: e,
+                                            ),
+                                          ),
+                                          if (i !=
+                                              controller.badgeFilter.length - 1)
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                        ],
+                                      );
+                                    }).toList(),
+                                  ),
+                                  Spacer(),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      SizedBox.fromSize(
+                                        size: Size(150, 60),
+                                        child: OutlinedButton(
+                                          style: OutlinedButton.styleFrom(
+                                            foregroundColor: Colors.grey,
+                                            backgroundColor: Colors.white,
+                                            side: BorderSide(
+                                              color: Colors.black,
+                                              width: 1,
+                                            ),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(50),
+                                            ),
+                                          ),
+                                          onPressed: () {},
+                                          child: Text(
+                                            'Reset',
+                                            style: textTitle(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.normal,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox.fromSize(
+                                        size: Size(150, 60),
+                                        child: OutlinedButton(
+                                          style: OutlinedButton.styleFrom(
+                                            foregroundColor: Colors.blue[800],
+                                            backgroundColor:
+                                                Theme.of(context).primaryColor,
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(50),
+                                            ),
+                                          ),
+                                          onPressed: () {},
+                                          child: Text(
+                                            'Apply',
+                                            style: textTitle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.normal,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
                         child: Container(
                           width: 40,
                           height: 40,
@@ -139,7 +285,6 @@ class HomeView extends GetView<HomeController> {
                       builder: (hC) {
                         return Container(
                           height: 150,
-                          // color: Colors.red,
                           child: GridView.builder(
                             physics: NeverScrollableScrollPhysics(),
                             padding: EdgeInsets.only(top: 15, bottom: 15),
@@ -177,92 +322,13 @@ class HomeView extends GetView<HomeController> {
                         ),
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
-                          return AspectRatio(
-                            aspectRatio: .78,
-                            child: Container(
-                              padding: EdgeInsets.all(20),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30),
-                                color: Get.theme.primaryColor,
-                              ),
-                              height: 100,
-                              width: 50,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Image.asset(
-                                    'assets/images/png/programmer.png',
-                                  ),
-                                  SizedBox(height: 10),
-                                  Text(
-                                    'Programming',
-                                    style: textTitle(
-                                        color: Colors.white, size: 18),
-                                  ),
-                                  SizedBox(height: 10),
-                                  Text(
-                                    'Created by Alonzoe Lie',
-                                    style: textSubtitle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.normal,
-                                        size: 14),
-                                  ),
-                                  Spacer(),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Container(
-                                            padding: EdgeInsets.all(5),
-                                            width: 30,
-                                            height: 30,
-                                            decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                            ),
-                                            child: SvgPicture.asset(
-                                              'assets/images/svg/google-docs.svg',
-                                            ),
-                                          ),
-                                          SizedBox(width: 5),
-                                          Text('17 Files',
-                                              style: textSubtitle(
-                                                  color: Colors.white))
-                                        ],
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Container(
-                                            padding: EdgeInsets.all(5),
-                                            width: 30,
-                                            height: 30,
-                                            decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                            ),
-                                            child: SvgPicture.asset(
-                                              'assets/images/svg/clock.svg',
-                                            ),
-                                          ),
-                                          SizedBox(width: 5),
-                                          Text('40 min',
-                                              style: textSubtitle(
-                                                  color: Colors.white))
-                                        ],
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
+                          return CardCourse(
+                            cover: 'assets/images/png/programmer.png',
+                            title: 'Programming',
+                            author: 'Alonzoe Lie',
+                            fileCount: 13,
+                            timeCount: 80,
+                            // aspectRatio: 5 / 4,
                           );
                         },
                       ),

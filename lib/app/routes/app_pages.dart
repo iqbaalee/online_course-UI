@@ -8,6 +8,8 @@ import 'package:online_course/app/modules/home/bindings/home_binding.dart';
 import 'package:online_course/app/modules/home/views/home_view.dart';
 import 'package:online_course/app/modules/main/bindings/main_binding.dart';
 import 'package:online_course/app/modules/main/views/main_view.dart';
+import 'package:online_course/app/modules/onboarding/bindings/onboarding_binding.dart';
+import 'package:online_course/app/modules/onboarding/views/onboarding_view.dart';
 import 'package:online_course/app/modules/search/bindings/search_binding.dart';
 import 'package:online_course/app/modules/search/views/search_view.dart';
 
@@ -18,7 +20,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.MAIN;
+  static const INITIAL = Routes.ONBOARDING;
 
   static final routes = [
     GetPage(
@@ -45,6 +47,11 @@ class AppPages {
       name: _Paths.SEARCH,
       page: () => SearchView(),
       binding: SearchBinding(),
+    ),
+    GetPage(
+      name: _Paths.ONBOARDING,
+      page: () => OnboardingView(),
+      binding: OnboardingBinding(),
     ),
   ];
 }

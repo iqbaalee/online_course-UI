@@ -7,8 +7,18 @@ class Badge extends StatelessWidget {
   final BadgeModel badge;
   final double? padding;
   final double? radius;
-  const Badge({Key? key, required this.badge, this.radius, this.padding})
-      : super(key: key);
+  final double? spreadRadius;
+  final double? blurRadius;
+  final Offset? offset;
+  const Badge({
+    Key? key,
+    required this.badge,
+    this.radius,
+    this.padding,
+    this.spreadRadius,
+    this.blurRadius,
+    this.offset,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +31,10 @@ class Badge extends StatelessWidget {
             : Get.theme.scaffoldBackgroundColor,
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            spreadRadius: .1,
-            offset: Offset(0, 0),
+            color: Colors.grey.withOpacity(0.1),
+            spreadRadius: blurRadius ?? .1,
+            blurRadius: blurRadius ?? .1,
+            offset: offset ?? Offset(0, 0),
           ),
         ],
       ),
